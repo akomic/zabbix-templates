@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
+import os
 import sys
 import json
-import requests
 import socket
+import requests
 
 # Set your token here
 token = ''
@@ -12,6 +13,8 @@ if len(sys.argv) == 1:
     print("Usage: {} <discovery|status|nodeStatus> [serviceID]".format(sys.argv[0]))
     sys.exit(1)
 
+if not token:
+    token = os.getenv('TOKEN', None)
 headers = {'X-Consul-Token': token} if token else {}
 
 nodeName = socket.gethostname()
